@@ -17,7 +17,6 @@ cursor = connection.cursor()
 
 
 for message in consumer:
-    #print("%s:%d:%d: key=%s value=%s" % (message.topic, message.partition, message.offset, message.key, message.value))
     x = str(message.value.decode('utf-8')).split('|')
     print(message.value.decode('utf-8'))
     print(x)
