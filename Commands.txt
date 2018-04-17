@@ -1,0 +1,75 @@
+cd to bin dir of kafka folder
+
+
+-------------starting zookeeper server -------------------------------------------------------------------
+
+ ./zookeeper-server-start.sh ../config/zookeeper.properties 
+
+---------------------------------------------------------
+
+before starting the kafka server, edit the server.properties in the config folder.
+
+uncommnent the advertise.listner line of file.
+
+change it to localhost so that zookeeper can understand url to pick the messgaes from.
+ 
+-------------starting Kafka server -----------------------------------------------------------------------
+
+./kafka-server-start.sh ../config/server.properties
+
+
+------- creating a topic ---------------------------------------------------------------------------------
+
+./kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
+
+------- Describe a topic ---------------------------------------------------------------------------------
+
+./kafka-topics.sh --describe --zookeeper localhost:2181 --topic test
+
+
+----list of topics----------------------------------------------------------------------------------------
+./kafka-topics.sh --list --zookeeper localhost:2181
+
+---creating a producer -----------------------------------------------------------------------------------
+./kafka-console-producer.sh --broker-list localhost:9092 --topic test
+
+
+--- creating a consumer ----------------------------------------------------------------------------------
+
+./kafka-console-consumer.sh --zookeeper localhost:9092 --topic test --from-beginning
+
+
+./kafka-console-consumer.sh --zookeeper localhost:9092 --topic test
+
+
+----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
+
+CREATE TABLE `emp_replicate` (
+  `empno` decimal(4,0) NOT NULL,
+  `ename` varchar(10) DEFAULT NULL,
+  `job` varchar(9) DEFAULT NULL,
+  `mgr` decimal(4,0) DEFAULT NULL,
+  `hiredate` date DEFAULT NULL,
+  `sal` decimal(7,2) DEFAULT NULL,
+  `comm` decimal(7,2) DEFAULT NULL,
+  `deptno` decimal(2,0) DEFAULT NULL
+)
+
+insert into emp-replicate values(7654,'MARTIN','SALESMAN',7698,'1981-09-28',1250.0,1400.0,20);
+
+insert into emp-replicate(empno,ename,job,mgr,hiredate,sal,com,deptno) values(7654,'MARTIN','SALESMAN',7698,'1981-09-28',1250.0,1400.0,20);
+
+
+CREATE TABLE `emp1` (
+  `empno` decimal(4,0) NOT NULL,
+  `ename` varchar(10) DEFAULT NULL,
+  `job` varchar(9) DEFAULT NULL,
+  `mgr` decimal(4,0) DEFAULT NULL,
+  `hiredate` date DEFAULT NULL,
+  `sal` decimal(7,2) DEFAULT NULL,
+  `comm` decimal(7,2) DEFAULT NULL,
+  `deptno` decimal(2,0) DEFAULT NULL
+)
+
+insert into emp1 values(7654,'MARTIN','SALESMAN',7698,'1981-09-28',1250.0,1400.0,20);
