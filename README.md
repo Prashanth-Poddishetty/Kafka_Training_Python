@@ -18,3 +18,4 @@ Following are the list of scripts present in the repo:
   - MysqlAsSink.py: This is a Consumer file, which injects the received records into MySql Database. The records are decoded at the consumer end.
   - ConsumerCompression.py: The records which are received are decompressed based on the compression type used in the Producer. 
   - ProducerCompression.py: The records are compressed using compressin type gZip. The compressed message are sent to consumer. 
+Server.properties: This is kafka server properties file for reference. 
